@@ -2,7 +2,7 @@
 
 ## 📚 Presentazione del Corso
 
-Questo repository contiene il materiale didattico, le esercitazioni pratiche e i progetti sviluppati per il corso di **Automazione Industriale e IoT** erogato da **Oltre Formazione**.
+Questo repository contiene il materiale didattico, le esercitazioni pratiche e i progetti sviluppati per il corso di **Python web app per IoT fatto in open plc su Linux ** erogato da **Oltre Formazione**.
 
 Il percorso si articola in due moduli principali da **16 ore ciascuno**:
 1. **Modulo Automazione OpenPLC (16 Ore)**: Logica PLC, programmazione Ladder, test hardware e collaudo.
