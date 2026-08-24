@@ -49,7 +49,7 @@ Modulo 16 ore  — OpenPLC
 ​06_collaudo_modulo_1
 
 Struttura e Programma dei Moduli
-​🔹 MODULO 1: Automazione con OpenPLC e Raspberry Pi (16 Ore)
+​🔹 MODULO : OpenPLC e Raspberry Pi (16 Ore)
 ​📌 Programma Dettagliato
 ​Introduzione ad OpenPLC & Primo Avvio:
 ​Cos'è OpenPLC e architettura del Runtime su Raspberry Pi.
