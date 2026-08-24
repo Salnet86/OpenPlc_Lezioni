@@ -1,0 +1,18 @@
+PROGRAM program0
+  VAR
+    A AT %IX100.0 : BOOL;
+    B AT %IX100.1 : BOOL;
+    Q AT %QX100.0 : BOOL;
+  END_VAR
+
+  Q := B AND A;
+END_PROGRAM
+
+
+CONFIGURATION Config0
+
+  RESOURCE Res0 ON PLC
+    TASK task0(INTERVAL := T#20ms,PRIORITY := 0);
+    PROGRAM instance0 WITH task0 : program0;
+  END_RESOURCE
+END_CONFIGURATION

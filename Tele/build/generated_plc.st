@@ -1,0 +1,23 @@
+PROGRAM program0
+  VAR
+    s1 AT %IX100.0 : BOOL;
+    s2 AT %IX100.1 : BOOL;
+    s3 AT %IX100.2 : BOOL;
+    K1 AT %QX100.0 : BOOL;
+    K2 AT %QX100.1 : BOOL;
+    LDP AT %QX100.2 : BOOL;
+  END_VAR
+
+  K1 := (K1 OR K2 AND s2) AND NOT(s1);
+  K2 := (K1 AND s3 OR K2) AND NOT(s1);
+  LDP := (K1 OR K2) AND NOT(s1);
+END_PROGRAM
+
+
+CONFIGURATION Config0
+
+  RESOURCE Res0 ON PLC
+    TASK task0(INTERVAL := T#20ms,PRIORITY := 0);
+    PROGRAM instance0 WITH task0 : program0;
+  END_RESOURCE
+END_CONFIGURATION

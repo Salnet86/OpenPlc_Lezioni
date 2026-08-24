@@ -1,0 +1,46 @@
+TYPE
+  LOGLEVEL : (CRITICAL, WARNING, INFO, DEBUG) := INFO;
+END_TYPE
+
+FUNCTION_BLOCK LOGGER
+  VAR_INPUT
+    TRIG : BOOL;
+    MSG : STRING;
+    LEVEL : LOGLEVEL := INFO;
+  END_VAR
+  VAR
+    TRIG0 : BOOL;
+  END_VAR
+
+  IF TRIG AND NOT TRIG0 THEN
+  {{
+   LogMessage(GetFbVar(LEVEL),(char*)GetFbVar(MSG, .body),GetFbVar(MSG, .len));
+  }}
+  END_IF;
+  TRIG0:=TRIG;
+END_FUNCTION_BLOCK
+
+
+PROGRAM program0
+  VAR
+    s1 : BOOL;
+    s2 : BOOL;
+    s3 : BOOL;
+    K1 : BOOL;
+    K2 : BOOL;
+    LDP : BOOL;
+  END_VAR
+
+  K1 := (K1 OR K2 AND s2) AND NOT(s1);
+  K2 := (K1 AND s3 OR K2) AND NOT(s1);
+  LDP := (K1 OR K2) AND NOT(s1);
+END_PROGRAM
+
+
+CONFIGURATION Config0
+
+  RESOURCE Res0 ON PLC
+    TASK task0(INTERVAL := T#20ms,PRIORITY := 0);
+    PROGRAM instance0 WITH task0 : program0;
+  END_RESOURCE
+END_CONFIGURATION

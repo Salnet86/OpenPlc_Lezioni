@@ -1,0 +1,31 @@
+PROGRAM program0
+  VAR
+    A1 AT %IX100.0 : BOOL;
+    A2 AT %IX100.1 : BOOL;
+    Q0 AT %QX100.0 : BOOL;
+    A3 AT %IX100.2 : BOOL;
+    A4 AT %IX100.3 : BOOL;
+    Q1 AT %QX100.1 : BOOL;
+    A5 AT %IX100.4 : BOOL;
+    A6 AT %IX100.5 : BOOL;
+    A7 AT %IX100.6 : BOOL;
+    A8 AT %IX100.7 : BOOL;
+    Q2 AT %QX100.2 : BOOL;
+    A9 AT %IX100.8 : BOOL;
+    Q3 AT %QX100.3 : BOOL;
+  END_VAR
+
+  Q0 := A2 AND A1;
+  Q1 := A3 OR A4;
+  Q2 := A6 AND NOT(A5) OR NOT(A8) AND A7;
+  Q3 := NOT(A9);
+END_PROGRAM
+
+
+CONFIGURATION Config0
+
+  RESOURCE Res0 ON PLC
+    TASK task0(INTERVAL := T#20ms,PRIORITY := 0);
+    PROGRAM instance0 WITH task0 : program0;
+  END_RESOURCE
+END_CONFIGURATION

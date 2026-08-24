@@ -1,0 +1,27 @@
+PROGRAM program0
+  VAR
+    CTU0 : CTU;
+  END_VAR
+  VAR
+    BT1 AT %IX100.0 : BOOL;
+    BT2 AT %IX100.1 : BOOL;
+    Led AT %QX100.0 : BOOL;
+  END_VAR
+  VAR
+    PV : INT := 5;
+    R_TRIG1 : R_TRIG;
+  END_VAR
+
+  R_TRIG1(CLK := BT1);
+  CTU0(CU := R_TRIG1.Q, R := BT2, PV := PV);
+  Led := CTU0.Q;
+END_PROGRAM
+
+
+CONFIGURATION Config0
+
+  RESOURCE Res0 ON PLC
+    TASK task0(INTERVAL := T#20ms,PRIORITY := 0);
+    PROGRAM instance0 WITH task0 : program0;
+  END_RESOURCE
+END_CONFIGURATION
