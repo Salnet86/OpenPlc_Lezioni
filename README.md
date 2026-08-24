@@ -10,19 +10,7 @@
 ​🛠️ Architettura del Sistema
 
 
-  [ UTENTE ] ◄── Browser Web ──► [ WEB APP PYTHON ]
-                                       │
-                                   Modbus/TCP
-                                       │
-                                ┌──────▼──────┐
-                                │   OpenPLC   │ (Runtime su Raspberry Pi)
-                                └──────┬──────┘
-                                       │
-                             [ GPIO Raspberry Pi ]
-                                       │
-                      ┌────────────────┴────────────────┐
-                      ▼                                 ▼
-              [ LED / Indicatori ]             [ Contattori K1/K2 ]
+
 Hardware: Raspberry Pi (gestione I/O fisici tramite GPIO).
 ​Software PLC: OpenPLC Runtime.
 ​Linguaggio di programmazione PLC: Ladder Diagram (LD).
