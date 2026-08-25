@@ -1,0 +1,37 @@
+PROGRAM program0
+  VAR
+    P1 : BOOL;
+    P2 : BOOL;
+    P3 : BOOL;
+    P4 : BOOL;
+    P5 : BOOL;
+    P6 : BOOL;
+    P7 : BOOL;
+    LED1 : BOOL;
+    LED2 : BOOL;
+    LED3 : BOOL;
+    LED4 : BOOL;
+    _TMP_AND1_OUT : BOOL;
+    _TMP_OR2_OUT : BOOL;
+    _TMP_AND10_OUT : BOOL;
+    _TMP_NOT18_OUT : BOOL;
+  END_VAR
+
+  _TMP_AND1_OUT := AND(P1, P2);
+  LED1 := _TMP_AND1_OUT;
+  _TMP_OR2_OUT := OR(P3, P4);
+  LED2 := _TMP_OR2_OUT;
+  _TMP_AND10_OUT := AND(P5, P6);
+  LED2 := _TMP_AND10_OUT;
+  _TMP_NOT18_OUT := NOT(P7);
+  LED4 := _TMP_NOT18_OUT;
+END_PROGRAM
+
+
+CONFIGURATION Config0
+
+  RESOURCE Res0 ON PLC
+    TASK task0(INTERVAL := T#20ms,PRIORITY := 0);
+    PROGRAM instance0 WITH task0 : program0;
+  END_RESOURCE
+END_CONFIGURATION
