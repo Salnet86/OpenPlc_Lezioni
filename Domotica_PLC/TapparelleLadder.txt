@@ -1,0 +1,14 @@
+(* --- MOTORE SALITA --- *)
+P_Salita     P_Stop      FC_Alto     Q_Discesa    Q_Salita
+---| |--+----[/]--------[/]-----------[/]--------( )---
+        |                                                 
+Q_Salita|                                                 
+---| |--+                                                 
+
+
+(* --- MOTORE DISCESA --- *)
+P_Discesa    P_Stop      FC_Basso    Q_Salita     Q_Discesa
+---| |--+----[/]--------[/]-----------[/]--------( )---
+        |                                                 
+Q_Discesa|                                                
+---| |--+
