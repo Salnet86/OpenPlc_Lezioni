@@ -119,18 +119,3 @@ Test degli I/O fisici e/o simulati.
 Modulo Structured Text (ST)
 Il modulo introduce la programmazione PLC in Structured Text, linguaggio testuale previsto dalla norma IEC 61131-3, mettendolo a confronto con il Ladder Diagram (LD).
 
-Argomenti
-Introduzione al linguaggio Structured Text.
-Struttura di un programma ST.
-Variabili, tipi di dato e dichiarazioni.
-Operatori logici, aritmetici e di confronto.
-Istruzioni IF / THEN / ELSE.
-Strutture CASE.
-Cicli FOR, WHILE e REPEAT.
-Gestione di ingressi e uscite.
-Utilizzo di timer e contatori in ST.
-Realizzazione di sequenze automatiche.
-Conversione di semplici programmi Ladder in Structured Text.
-Test e simulazione con OpenPLC.
-Esecuzione del programma ST sul Raspberry Pi.
-Esercitazione finale con gestione di I/O e sequenza automatica.
