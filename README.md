@@ -1,73 +1,117 @@
-# ⚙️ OpenPLC + Python Web App + Raspberry Pi — Corso Oltre Formazione
+# ⚙️ OpenPLC + Python Web App + Raspberry Pi
+## Corso Oltre Formazione
 
 ## 📚 Presentazione del Corso
 
-Questo repository contiene il materiale didattico, le esercitazioni pratiche e i progetti sviluppati per il corso di **Python web app per IoT fatto in open plc su Linux ** erogato da **Oltre Formazione**.
+Questo repository contiene il materiale didattico, le esercitazioni pratiche e i progetti sviluppati durante il corso **OpenPLC + Python Web App + Raspberry Pi**, dedicato alla realizzazione di sistemi di automazione e supervisione IoT su piattaforma Linux.
 
-Il percorso si articola in due moduli principali da **16 ore ciascuno**:
-1. **Modulo Automazione OpenPLC (16 Ore)**: Logica PLC, programmazione Ladder, test hardware e collaudo.
-2. **Modulo Python Web App (16 Ore)**: Interfaccia web di controllo, protocollo Modbus/TCP, collaudo e supervisione IoT.
+Il corso, erogato da **Oltre Formazione**, integra la programmazione PLC, il controllo di dispositivi fisici tramite Raspberry Pi, la comunicazione industriale Modbus/TCP e lo sviluppo di un'interfaccia web in Python.
+
+Il percorso formativo è articolato in due moduli principali, della durata di **20 ore ciascuno**, per un totale di **40 ore**:
+
+1. **Modulo Automazione OpenPLC — 20 Ore**
+   - Fondamenti di automazione PLC
+   - Programmazione Ladder (LD)
+   - Logica combinatoria e sequenziale
+   - Contatori e temporizzatori
+   - Gestione di motori e contattori
+   - Interblocchi e condizioni di sicurezza
+   - Configurazione e collaudo su Raspberry Pi
+
+2. **Modulo Python Web App e IoT — 20 Ore**
+   - Sviluppo di applicazioni web con Python
+   - Comunicazione Modbus/TCP
+   - Lettura e scrittura delle variabili OpenPLC
+   - Realizzazione di una dashboard web
+   - Controllo remoto degli I/O
+   - Monitoraggio dello stato dell'impianto
+   - Integrazione tra PLC, Raspberry Pi e interfaccia web
+   - Collaudo del sistema IoT completo
 
 ---
 
 ## ❓ Cos'è OpenPLC?
 
-**OpenPLC** è la prima piattaforma PLC (Programmable Logic Controller) completamente open-source conforme allo standard **IEC 61131-3**.
+**OpenPLC** è una piattaforma open-source per la programmazione e l'esecuzione di applicazioni PLC, basata sullo standard **IEC 61131-3**.
 
-Il sistema è composto da due elementi fondamentali:
-* **OpenPLC Editor**: Software di sviluppo per PC utilizzato per la progettazione, la simulazione e la compilazione dei programmi in linguaggio **Ladder (LD)**.
-* **OpenPLC Runtime**: Il motore di esecuzione installato sul target (**Raspberry Pi**) che esegue la logica di controllo in tempo reale e gestisce direttamente i pin GPIO di I/O (pulsanti, sensori, LED, relè e contattori).
+Nel progetto viene utilizzata per sviluppare la logica di automazione e successivamente eseguirla su un **Raspberry Pi con sistema operativo Linux**.
 
----
+L'ambiente è costituito principalmente da:
 
-## 🛠️ Architettura e Hardware del Sistema
+- **OpenPLC Editor**: ambiente di sviluppo utilizzato per progettare e programmare l'applicazione PLC attraverso i linguaggi previsti dallo standard IEC 61131-3, con particolare attenzione al **Ladder Diagram (LD)**.
+- **OpenPLC Runtime**: ambiente di esecuzione installato sul Raspberry Pi, responsabile dell'esecuzione ciclica del programma PLC e della gestione delle comunicazioni e degli I/O configurati.
+
+Il principio di funzionamento del PLC segue il classico ciclo di scansione:
 
 ```text
- [ UTENTE / CLIENT ] ◄── Browser Web ──► [ PYTHON WEB APP ]
-                                                 │
-                                            Modbus/TCP
-                                                 │
-                                          ┌──────▼──────┐
-                                          │   OpenPLC   │ (Runtime su Raspberry Pi)
-                                          └──────┬──────┘
-                                                 │
-                                       [ GPIO Raspberry Pi ]
-                                                 │
-                 ┌───────────────────────────────┼───────────────────────────────┐
-                 ▼                               ▼                               ▼
-       [ LED & Indicatori ]             [ Contattori K1/K2 ]            [ Sensori / Pulsanti ]
+        ┌───────────────────────┐
+        │   LETTURA DEGLI I/O   │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │  ESECUZIONE PROGRAMMA │
+        │       LADDER          │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │   AGGIORNAMENTO I/O   │
+        └───────────┬───────────┘
+                    │
+                    ▼
+              NUOVO CICLO
+                         ┌─────────────────────┐
+                         │       UTENTE        │
+                         │   PC / Smartphone   │
+                         └──────────┬──────────┘
+                                    │
+                                 Browser
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   PYTHON WEB APP    │
+                         │     Dashboard       │
+                         └──────────┬──────────┘
+                                    │
+                              Modbus/TCP
+                                    │
+                                    ▼
+                    ┌────────────────────────────┐
+                    │      RASPBERRY PI          │
+                    │                            │
+                    │   ┌────────────────────┐   │
+                    │   │   OpenPLC Runtime  │   │
+                    │   └─────────┬──────────┘   │
+                    │             │              │
+                    │          GPIO / I/O        │
+                    │             │              │
+                    └─────────────┼──────────────┘
+                                  │
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+              ▼                   ▼                   ▼
+       ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+       │ LED /       │     │ Contattori  │     │ Pulsanti /  │
+       │ Indicatori  │     │ K1 / K2     │     │ Sensori     │
+       └─────────────┘     └─────────────┘     └─────────────┘
+📘 MODULO 1 — AUTOMAZIONE OPENPLC
+Durata: 20 Ore
+Il primo modulo introduce i principi fondamentali della programmazione PLC attraverso OpenPLC, con particolare attenzione alla realizzazione di applicazioni Ladder e alla loro esecuzione su Raspberry Pi.
 
+L'attività didattica alterna teoria, programmazione, simulazione, esercitazioni pratiche e collaudo dell'hardware.
 
+📋 Programma del Modulo 1
+01 — Primo Avvio e Accensione LED
+Durata: 3 ore
 
-
-Modulo 16 ore  — OpenPLC
-​01_accensione_led
-​02_porte_logiche
-​03_contatore_avanti_ctu
-​04_timer_ton_tof_tim
-​05_teleinversione_k1_k2
-​06_collaudo_modulo_1
-
-Struttura e Programma dei Moduli
-​🔹 MODULO : OpenPLC e Raspberry Pi (16 Ore)
-​📌 Programma Dettagliato
-​Introduzione ad OpenPLC & Primo Avvio:
-​Cos'è OpenPLC e architettura del Runtime su Raspberry Pi.
-​Configurazione del ciclo di Scan Time (Lettura Ingressi ➔ Logica ➔ Scrittura Uscite).
-​Test Pratico: Accensione e gestione base di LED fisici/virtuali.
-​Porte Logiche in Ladder Diagram:
-​Trasposizione della logica Booleana in linguaggio Ladder.
-​Implementazione delle porte logiche standard: AND, OR, NOT, NAND, NOR, XOR.
-​Gestione dei Contatori (Counter):
-​Programmazione ed uso del contatore incrementale CTU (Contatore Avanti).
-​Gestione dei limiti di conteggio e reset logico.
-​Temporizzatori (Timer IEC 61131-3):
-​TON (Timer On-Delay — Ritardo all'attivazione).
-​TOF (Timer Off-Delay — Ritardo alla disattivazione).
-​TP / TIM (Timer Pulse — Impulso temporizzato / Generazione temporizzazioni).
-​Teleinversione di Marcia & Sicurezza:
-​Circuito di comando per la teleinversione di marcia di un motore (Avanti/Indietro).
-​Gestione dei contattori K1 (Marcia Avanti) e K2 (Marcia Indietro).
-​Configurazione degli interblocchi elettrici e logici (evita il cortocircuito da attivazione simultanea).
-​Test e Collaudo Finale Modulo 1:
-​Verifiche funzionali e collaudo del programma Ladder completo su scheda Raspberry Pi.
+Introduzione ai sistemi PLC e all'automazione industriale.
+Installazione e configurazione dell'ambiente OpenPLC.
+Introduzione a OpenPLC Editor e OpenPLC Runtime.
+Configurazione del Raspberry Pi come piattaforma di esecuzione.
+Introduzione al ciclo di scansione PLC.
+Configurazione degli ingressi e delle uscite.
+Creazione del primo programma Ladder.
+Comando di un'uscita digitale.
+Accensione e spegnimento di LED.
+Test degli I/O fisici e/o simulati.
