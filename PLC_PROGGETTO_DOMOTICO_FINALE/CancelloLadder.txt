@@ -1,0 +1,19 @@
+I_Chiave     FC_Aperto   Fotocellula Q_Canc_Indietro  Q_Canc_Avanti
+---| |--+-------[/]---------[ ]-----------[/]------------( )---
+        |                                                 
+Q_Canc_Avanti|                                            
+---| |--+
+
+
+FC_Aperto    Timer_Pausa                      [ TON ]
+---| |--+-------[/]---------------------------[       ]
+        |                                     [ IN  PT]
+M_Pausa_Attiva|                               [     T#10s]
+---| |--+                                     [     Q ]---( M_Pausa_Attiva )
+
+
+Timer  FC_Chiuso   Fotocellula Q_Canc_Avanti   Q_Canc_Indietro
+---| |--+-------[ ]---------[ ]-----------[/]------------( )---
+        |                                                 
+Q_Canc_Indietro|                                          
+---| |--+

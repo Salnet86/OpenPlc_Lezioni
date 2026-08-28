@@ -1,0 +1,75 @@
+(* --- CUCINA --- *)
+I_Cucina     M_Stato_Cucina   M_Stato_Cucina
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Cucina|                           
+---| |--+                                 
+
+M_Stato_Cucina                    Q_Cucina
+---| |-----------------------------( )---
+
+
+(* --- CAMERA DA LETTO --- *)
+I_Camera     M_Stato_Camera   M_Stato_Camera
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Camera|                           
+---| |--+                                 
+
+M_Stato_Camera                    Q_Camera
+---| |-----------------------------( )---
+
+
+(* --- SOGGIORNO --- *)
+I_Soggiorno  M_Stato_Sogg     M_Stato_Sogg
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Sogg|                             
+---| |--+                                 
+
+M_Stato_Sogg                      Q_Soggiorno
+---| |-----------------------------( )---
+
+
+(* --- BAGNO --- *)
+I_Bagno      M_Stato_Bagno    M_Stato_Bagno
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Bagno|                            
+---| |--+                                 
+
+M_Stato_Bagno                     Q_Bagno
+---| |-----------------------------( )---
+
+
+(* --- DORMITORIO 1 --- *)
+I_Dorm1      M_Stato_Dorm1    M_Stato_Dorm1
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Dorm1|                            
+---| |--+                                 
+
+M_Stato_Dorm1                     Q_Dorm1
+---| |-----------------------------( )---
+
+
+(* --- DORMITORIO 2 --- *)
+I_Dorm2      M_Stato_Dorm2    M_Stato_Dorm2
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Dorm2|                            
+---| |--+                                 
+
+M_Stato_Dorm2                     Q_Dorm2
+---| |-----------------------------( )---
+
+
+(* --- DORMITORIO 3 --- *)
+I_Dorm3      M_Stato_Dorm3    M_Stato_Dorm3
+---| |--+--------[/]--------------( S )---
+        |                                 
+M_Stato_Dorm3|                            
+---| |--+                                 
+
+M_Stato_Dorm3                     Q_Dorm3
+---| |-----------------------------( )---

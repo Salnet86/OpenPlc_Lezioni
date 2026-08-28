@@ -1,0 +1,47 @@
+(* ========================= *)
+(* RESET MEMORIE *)
+(* ========================= *)
+
+I_Cucina
+---| |------------------------( R ) M_Stato_Cucina
+
+
+I_Camera
+---| |------------------------( R ) M_Stato_Camera
+
+
+I_Dormitorio1
+---| |------------------------( R ) M_Stato_Dormi1
+
+
+I_Dormitorio2
+---| |------------------------( R ) M_Stato_Dormi2
+
+
+I_Dormitorio3
+---| |------------------------( R ) M_Stato_Dormi3
+
+
+(* --- RESET TAPPARELLA --- *)
+
+P_Stop
+---| |------------------------( R ) Q_Salita
+
+P_Stop
+---| |------------------------( R ) Q_Discesa
+
+
+FC_Alto
+---| |------------------------( R ) Q_Salita
+
+FC_Basso
+---| |------------------------( R ) Q_Discesa
+
+(* --- RESET CANCELLO --- *)
+
+FC_Aperto
+---| |------------------------( R ) Q_Cancello_Avanti
+
+FC_Chiuso
+---| |------------------------( R ) Q_Cancello_Indietro
+
