@@ -1,0 +1,8 @@
+// Nel blocco principale richiamiamo il nostro FB con il suo DB d'istanza
+"FB_PompaTimer_DB"(
+    Start       := "I0.0_PulsanteStart",
+    Stop        := "I0.1_PulsanteStop",
+    TempoLavoro := T#15s,                    // Impostiamo 15 secondi di funzionamento
+    Pompa       := "Q0.0_ComandoPompa",
+    InEsecuzione:= "M0.2_StatoTimerAttivo"
+);
