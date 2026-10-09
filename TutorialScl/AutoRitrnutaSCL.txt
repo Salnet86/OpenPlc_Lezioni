@@ -1,0 +1,6 @@
+Auto ritenuta marcia e arresto scl esempio 
+
+
+// Il motore resta attivo se c'è marcia (o auto-ritenuta) E l'arresto è a 0 (NOT #Arresto)
+#Motore := (#Marcia OR #Motore) AND NOT #Arresto;
+

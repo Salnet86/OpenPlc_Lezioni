@@ -1,0 +1,56 @@
+FUNCTION_BLOCK "FB_PompaTimer"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    Start : BOOL; // Pulsante di marcia
+    Stop : BOOL; // Pulsante di arresto d'emergenza / stop
+    TempoLavoro : TIME; // Durata della pompa (es. T#10s)
+END_VAR
+
+
+VAR_OUTPUT
+    Pompa : BOOL; // Uscita fisica verso il relè della pompa
+    InEsecuzione : BOOL; // Stato per indicare che il ciclo è attivo
+END_VAR
+
+
+VAR_STAT
+    // FONDAMENTALE: Il timer IEC si dichiara nelle STAT perché ha memoria
+    MioTimer : "TON";      
+END_VAR
+
+
+BEGIN
+    // 1. LOGICA DI MARCIA / ARRESTO CON AUTORITENUTA
+    // La pompa si accende se premi Start, resta accesa, ma si spegne se:
+    // - Premi Stop
+    // - Oppure il timer finisce il conteggio (#MioTimer.Q diventa TRUE)
+    #InEsecuzione := (#Start OR #InEsecuzione) AND NOT #Stop AND NOT #MioTimer.Q;
+
+
+    // 2. GESTIONE DEL TIMER (TON)
+    // Diamo in pasto al timer l'ingresso di marcia e il tempo impostato
+    #MioTimer(IN := #InEsecuzione,
+              PT := #TempoLavoro);
+
+
+    // 3. ASSEGNAZIONE DELL'USCITA
+    #Pompa := #InEsecuzione;
+
+
+END_FUNCTION_BLOCK
+
+
+
+
+// Nel blocco principale richiamiamo il nostro FB con il suo DB d'istanza
+"FB_PompaTimer_DB"(
+    Start := "I0.0_PulsanteStart",
+    Stop := "I0.1_PulsanteStop",
+    TempoLavoro := T#15s, // Impostiamo 15 secondi di funzionamento
+    Pompa := "Q0.0_ComandoPompa",
+    InEsecuzione:= "M0.2_StatoTimerAttivo"
+);
+

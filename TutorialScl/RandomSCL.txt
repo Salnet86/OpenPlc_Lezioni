@@ -1,0 +1,36 @@
+FUNCTION "FC_GeneraCasuale" : INT
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    Minimo : INT; // Es. 1
+    Massimo : INT; // Es. 100
+END_VAR
+
+
+VAR_IN_OUT
+    Seed : DINT; // Il seme che cambia a ogni ciclo (va salvato in una variabile globale o statica nel blocco chiamante)
+END_VAR
+
+
+VAR_TEMP
+    AmpiezzaRange : INT;
+END_VAR
+
+
+BEGIN
+    // 1. Formula matematica LCG per mescolare il seme
+    // (Numeri fissi standard storicamente usati per i generatori casuali)
+    #Seed := (1103515245 * #Seed) + 12345;
+    
+    // 2. Calcoliamo la larghezza del range (es. da 1 a 100 = 100 valori possibili)
+    #AmpiezzaRange := #Massimo - #Minimo + 1;
+    
+    // 3. Tronchiamo il seme nel range desiderato usando il MOD (resto della divisione)
+    // Usiamo ABS per evitare numeri negativi
+    "FC_GeneraCasuale" := #Minimo + TO_INT(ABS(#Seed) MOD INT_TO_DINT(#AmpiezzaRange));
+
+
+END_FUNCTION
+

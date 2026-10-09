@@ -1,0 +1,51 @@
+Funzione FB
+
+
+
+
+FUNCTION_BLOCK "FB_GestioneNegativi"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    ValoreIngresso : INT; // Il valore da monitorare
+    ResetAllarme : BOOL; // Pulsante per resettare il conteggio/allarme
+END_VAR
+
+
+VAR_OUTPUT
+    E_Negativo : BOOL; // True se attualmente è negativo
+    NumeroNegativi : INT; // Quante volte è andato in negativo (MEMORIZZATO)
+END_VAR
+
+
+VAR_STAT
+    // Queste variabili vivono nel DB d'istanza e NON si azzerano alla fine del ciclo
+    StatoPrecedenteNegativo : BOOL; 
+END_VAR
+
+
+BEGIN
+    // 1. Controllo istantaneo se è negativo
+    #E_Negativo := (#ValoreIngresso < 0);
+
+
+    // 2. Rilevamento del fronte: se adesso è negativo ma nel ciclo prima NON lo era...
+    IF #E_Negativo AND NOT #StatoPrecedenteNegativo THEN
+        #NumeroNegativi := #NumeroNegativi + 1; // ...incremento il contatore in memoria
+    END_IF;
+
+
+    // 3. Gestione del Reset del conteggio
+    IF #ResetAllarme THEN
+        #NumeroNegativi := 0;
+    END_IF;
+
+
+    // 4. Aggiorniamo la memoria dello stato per il prossimo ciclo di scansione
+    #StatoPrecedenteNegativo := #E_Negativo;
+
+
+END_FUNCTION_BLOCK
+

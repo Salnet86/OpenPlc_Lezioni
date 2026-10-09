@@ -1,0 +1,19 @@
+// 1. INCREMENTO CONTINUO: A ogni ciclo di scansione il contatore sale di 1
+// (Aggiungiamo un limite per farlo ripartire da 1 quando arriva a 100)
+#ContatoreCiclico := #ContatoreCiclico + 1;
+
+
+IF #ContatoreCiclico > 100 THEN
+    #ContatoreCiclico := 1;
+END_IF;
+
+
+// 2. CAMPIONAMENTO: Quando l'operatore preme il pulsante, "peschiamo" il valore al volo
+IF #PulsanteGenera AND NOT #MemoriaPulsante THEN
+    #NumeroCasualeEstratto := #ContatoreCiclico;
+END_IF;
+
+
+// Aggiorniamo la memoria del pulsante per il fronte di salita
+#MemoriaPulsante := #PulsanteGenera;
+

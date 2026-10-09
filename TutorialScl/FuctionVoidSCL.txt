@@ -1,0 +1,27 @@
+FUNCTION "FC_VerificaNegativo" : VOID
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    ValoreIngresso : INT; // Dato in ingresso
+END_VAR
+
+
+VAR_OUTPUT
+    FlagNegativo : BOOL; // Risultato restituito
+END_VAR
+
+
+BEGIN
+    // Assegnazione diretta senza bisogno di IF complessi
+    #FlagNegativo := (#ValoreIngresso < 0);
+
+
+END_FUNCTION
+
+
+// Richiamo la funzione VOID creata prima
+"FC_VerificaNegativo"(ValoreIngresso := #TemperaturaAttuale,
+                      FlagNegativo := #AllarmeTemperaturaNegativa);
+

@@ -1,0 +1,64 @@
+FUNCTION "FC_VerificaNegativo" : VOID
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    ValoreIngresso : INT; // Dato in ingresso
+END_VAR
+
+
+VAR_OUTPUT
+    FlagNegativo : BOOL; // Risultato restituito
+END_VAR
+
+
+BEGIN
+    // Assegnazione diretta senza bisogno di IF complessi
+    #FlagNegativo := (#ValoreIngresso < 0);
+
+
+END_FUNCTION
+
+
+// Richiamo la funzione VOID creata prima
+"FC_VerificaNegativo"(ValoreIngresso := #TemperaturaAttuale,
+                      FlagNegativo := #AllarmeTemperaturaNegativa);
+
+
+
+
+FUNCTION "FC_LimitaValore" : REAL
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    Ingresso : REAL; // Il valore da controllare
+    Minimo : REAL; // Soglia minima consentita
+    Massimo : REAL; // Soglia massima consentita
+END_VAR
+
+
+VAR_TEMP
+    // Eventuali variabili temporanee di appoggio (qui non strettamente necessarie)
+END_VAR
+
+
+BEGIN
+    // Se il valore è inferiore al minimo, blocchiamo al minimo
+    IF #Ingresso < #Minimo THEN
+        "FC_LimitaValore" := #Minimo;
+        
+    // Se il valore è superiore al massimo, blocchiamo al massimo
+    ELSIF #Ingresso > #Massimo THEN
+        "FC_LimitaValore" := #Massimo;
+        
+    // Altrimenti lasciamo passare il valore così com'è
+    ELSE
+        "FC_LimitaValore" := #Ingresso;
+    END_IF;
+
+
+END_FUNCTION
+

@@ -1,0 +1,26 @@
+FUNCTION "FC_DifferenzaAssoluta" : REAL
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+
+VAR_INPUT
+    Valore1 : REAL;
+    Valore2 : REAL;
+END_VAR
+
+
+VAR_TEMP
+    RisultatoTemporaneo : REAL;
+END_VAR
+
+
+BEGIN
+    // 1. Calcoliamo la sottrazione normale (può dare un numero negativo)
+    #RisultatoTemporaneo := #Valore1 - #Valore2;
+    
+    // 2. Usiamo ABS per prendere solo il valore assoluto della differenza
+    "FC_DifferenzaAssoluta" := ABS(#RisultatoTemporaneo);
+
+
+END_FUNCTION
+

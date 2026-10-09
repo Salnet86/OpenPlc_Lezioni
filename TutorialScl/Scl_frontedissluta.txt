@@ -1,0 +1,7 @@
+// 1. Rileviamo il fronte di salita e invertiamo lo stato del LED
+IF #button AND NOT #memoria THEN
+#led := NOT #led; // Se era spento si accende, se era acceso si spegne
+END_IF;
+
+// 2. FONDAMENTALE: Aggiorniamo la memoria con lo stato attuale del pulsante
+#memoria := #button;
