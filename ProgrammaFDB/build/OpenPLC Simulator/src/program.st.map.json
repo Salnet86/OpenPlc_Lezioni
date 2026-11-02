@@ -1,0 +1,14 @@
+{
+  "pouOffsets": {
+    "running_version": {
+      "kind": "FUNCTION_BLOCK",
+      "startLine": 1,
+      "endLine": 20
+    },
+    "main": {
+      "kind": "PROGRAM",
+      "startLine": 22,
+      "endLine": 39
+    }
+  }
+}
